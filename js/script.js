@@ -12,7 +12,22 @@ const onGenerateSubmit = (e) => {
         alert("Please enter a URL");
     } else {
         console.log(url, size);
+        showSpinner();
+
+        setTimeout(() => {
+            hideSpinner();
+        }, 1000);
     }
 }
+
+const showSpinner = () => {
+    document.getElementById("spinner").style.display = "block";
+}
+
+const hideSpinner = () => {
+    document.getElementById("spinner").style.display = "none";
+}
+
+hideSpinner();
 
 form.addEventListener("submit", onGenerateSubmit);
