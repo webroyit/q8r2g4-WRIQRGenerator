@@ -16,10 +16,16 @@ const onGenerateSubmit = (e) => {
     } else {
         console.log(url, size);
         showSpinner();
-
+        
         setTimeout(() => {
             hideSpinner();
             generateQRCode(url, size);
+
+            // QR Code take time to be created
+            setTimeout(() => {
+                const saveUrl = qr.querySelector("img").src;
+                createSaveBtn(saveUrl);
+            }, 50)
         }, 1000);
     }
 }
@@ -43,6 +49,19 @@ const hideSpinner = () => {
 
 const clearUI = () => {
     qr.innerHTML = "";
+    const saveLink = document.getElementById("save-link");
+    if (saveLink) saveLink.remove();
+}
+
+// saveUrl from QR Code
+const createSaveBtn = (saveUrl) => {
+    const link = document.createElement("a");
+    link.id = "save-link";
+    link.classList = "bg-red-500 hover:bg-red-700 text-white font-bold py-2 rounded w-1/3 m-auto my-5"
+    link.href = saveUrl;
+    link.download = "qrcode";
+    link.innerHTML = "Save Image";
+    document.getElementById("generated").appendChild(link);
 }
 
 hideSpinner();
