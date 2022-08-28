@@ -5,6 +5,9 @@ const onGenerateSubmit = (e) => {
     // Prevent the default behavior because it is a form submission
     e.preventDefault();
 
+    // Remove old QR Code
+    clearUI();
+
     const url = document.getElementById("url").value;
     const size = document.getElementById("size").value;
     
@@ -36,6 +39,10 @@ const showSpinner = () => {
 
 const hideSpinner = () => {
     document.getElementById("spinner").style.display = "none";
+}
+
+const clearUI = () => {
+    qr.innerHTML = "";
 }
 
 hideSpinner();
